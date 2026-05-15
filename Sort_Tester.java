@@ -4,6 +4,8 @@ public class Sort_Tester {
   public static void main(String[] args) {
     rand = new Random();
 
+    long[] array7 = createRandomArray(125);
+    long[] array6 = createRandomArray(250);
     long[] array1 = createRandomArray(500);
     long[] array2 = createRandomArray(1000);
     long[] array3 = createRandomArray(2000);
@@ -13,11 +15,29 @@ public class Sort_Tester {
     insert_sort insertSort = new insert_sort();
     hybrid_sort hybridSort = new hybrid_sort();
 
+    System.out.println("Warming up JIT");
     for(int i = 0; i < 20000; i++) {
       quickSort.sort(createRandomArray(1000), 1000);
       insertSort.sort(createRandomArray(1000), 1000);
       hybridSort.sort(createRandomArray(1000), 1000);
     }
+    System.out.println("Done warming up!");
+
+    quickSort = new quick_sort();
+    System.out.println("Quick sort (125):");
+    long[] a7 = createDeepCopy(array7, 125);
+    results ra7 = quickSort.sort(a7, a7.length);
+    ra7.printResults();
+
+    System.out.println();
+
+    quickSort = new quick_sort();
+    System.out.println("Quick sort (250):");
+    long[] a6 = createDeepCopy(array6, 250);
+    results ra6 = quickSort.sort(a6, a6.length);
+    ra6.printResults();
+
+    System.out.println();
 
     quickSort = new quick_sort();
     System.out.println("Quick sort (500):");
@@ -63,6 +83,22 @@ public class Sort_Tester {
 
 
     insertSort = new insert_sort();
+    System.out.println("Insertion sort (125):");
+    long[] b7 = createDeepCopy(array7, 125);
+    results rb7 = insertSort.sort(b7, b7.length);
+    rb7.printResults();
+
+    System.out.println();
+
+    insertSort = new insert_sort();
+    System.out.println("Insertion sort (250):");
+    long[] b6 = createDeepCopy(array6, 250);
+    results rb6 = insertSort.sort(b6, b6.length);
+    rb6.printResults();
+
+    System.out.println();
+
+    insertSort = new insert_sort();
     System.out.println("Insertion Sort (500):");
     long[] b1 = createDeepCopy(array1, 500);
     results rb1 = insertSort.sort(b1, b1.length);
@@ -104,6 +140,22 @@ public class Sort_Tester {
     System.out.println();
     System.out.println();
 
+
+    hybridSort = new hybrid_sort();
+    System.out.println("Hybrid Quick/Insertion Sort (125):");
+    long[] c7 = createDeepCopy(array7, 125);
+    results rc7 = hybridSort.sort(c7, c7.length);
+    rc7.printResults();
+
+    System.out.println();
+
+    hybridSort = new hybrid_sort();
+    System.out.println("Hybrid Quick/Insertion Sort (250):");
+    long[] c6 = createDeepCopy(array6, 250);
+    results rc6 = hybridSort.sort(c6, c6.length);
+    rc6.printResults();
+
+    System.out.println();
 
     hybridSort = new hybrid_sort();
     System.out.println("Hybrid Quick/Insertion Sort (500):");
